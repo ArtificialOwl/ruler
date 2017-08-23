@@ -1,0 +1,50 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    app_namespace: Circles_Upgrade_Fix
+    github: daita/circles_upgrade_fix
+    app_id: circles_upgrade_fix
+    app_name: Circles Upgrade Fix
+    dir: /home/maxence/test_app
+
+  tasks:
+
+    - name: create app directories
+      file:
+        state: directory
+        path: "{{dir}}{{item.name}}"
+      with_items:
+        - { name: '/' }
+        - { name: '/appinfo' }
+        - { name: '/css' }
+        - { name: '/img' }
+        - { name: '/js' }
+        - { name: '/lib' }
+        - { name: '/lib/AppInfo' }
+        - { name: '/lib/Controller' }
+        - { name: '/lib/Exceptions' }
+        - { name: '/lib/Service' }
+        - { name: '/screenshots' }
+        - { name: '/templates' }
+
+    - name: generate app
+      template:
+        src: "tmpl{{item.name}}"
+        dest: "{{dir}}{{item.name}}"
+      with_items:
+        - { name: '/appinfo/app.php' }
+        - { name: '/appinfo/info.xml' }
+        - { name: '/appinfo/routes.php' }
+        - { name: '/css/navigate.css' }
+        - { name: '/img/app.svg' }
+        - { name: '/js/app.js' }
+        - { name: '/lib/AppInfo/Application.php' }
+        - { name: '/lib/Controller/NavigationController.php' }
+        - { name: '/lib/Controller/SimpleController.php' }
+        - { name: '/lib/Exceptions/SimpleException.php' }
+        - { name: '/lib/Service/ConfigService.php' }
+        - { name: '/lib/Service/MiscService.php' }
+        - { name: '/lib/Service/SimpleService.php' }
+        - { name: '/templates/navigate.php' }
+
