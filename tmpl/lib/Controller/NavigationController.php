@@ -3,27 +3,34 @@
 namespace OCA\{{app_namespace}}\Controller;
 
 use OCA\{{app_namespace}}\AppInfo\Application;
+use OCA\{{app_namespace}}\Service\ConfigService;
+use OCA\{{app_namespace}}\Service\MiscService;
 use OCP\AppFramework\Controller;
-use OCP\AppFramework\Http;
-use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IRequest;
 
 class NavigationController extends Controller {
 
-	/** @var string */
-	private $userId;
+	/** @var ConfigService */
+	private $configService;
+
+	/** @var MiscService */
+	private $miscService;
+
 
 	/**
 	 * NavigationController constructor.
 	 *
-	 * @param string $appName
-	 * @param \OCP\IRequest $request
-	 * @param string $userId
+	 * @param IRequest $request
+	 * @param ConfigService $configService
+	 * @param MiscService $miscService
 	 */
-	function __construct($appName, \OCP\IRequest $request, $userId) {
-		parent::__construct($appName, $request);
-		$this->userId = $userId;
+	function __construct(IRequest $request, ConfigService $configService, MiscService $miscService) {
+		parent::__construct(Application::APP_NAME, $request);
+		$this->configService = $configService;
+		$this->miscService = $miscService;
 	}
+
 
 	/**
 	 * @NoCSRFRequired
@@ -34,33 +41,37 @@ class NavigationController extends Controller {
 	 */
 	public function navigate() {
 		$data = [
-			'param' => 'value'
+			ConfigService::APP_TEST => $this->configService->getAppValue(
+				ConfigService::APP_TEST
+			),
+			ConfigService::APP_TEST_PERSONAL => $this->configService->getUserValue(
+				ConfigService::APP_TEST_PERSONAL
+			)
 		];
 
-		return new TemplateResponse(
-			Application::APP_NAME, 'navigate', $data
-		);
+		return new TemplateResponse(Application::APP_NAME, 'navigate', $data);
+	}
+
+
+	/**
+	 * @NoCSRFRequired
+	 *
+	 * @return TemplateResponse
+	 */
+	public function admin() {
+		return new TemplateResponse(Application::APP_NAME, 'settings.admin', [], 'blank');
 	}
 
 
 	/**
 	 * @NoAdminRequired
-	 * @NoSubAdminRequired
+	 * @NoCSRFRequired
 	 *
-	 * @return DataResponse
+	 * @return TemplateResponse
 	 */
-	public function settings() {
-		$data = [
-			'user_id' => $this->userId,
-			'status'  => 1
-		];
-
-		return new DataResponse(
-			$data,
-			Http::STATUS_OK
-		);
+	public function personal() {
+		return new TemplateResponse(Application::APP_NAME, 'settings.personal', [], 'blank');
 	}
 
+
 }
-
-

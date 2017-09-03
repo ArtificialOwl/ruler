@@ -9,9 +9,11 @@ use OCP\Util;
 class ConfigService {
 
 	const APP_TEST = 'test';
+	const APP_TEST_PERSONAL = 'test_personal';
 
 	private $defaults = [
-		self::APP_TEST => '1'
+		self::APP_TEST          => '1',
+		self::APP_TEST_PERSONAL => '0'
 	];
 
 	/** @var IConfig */
@@ -47,7 +49,6 @@ class ConfigService {
 	 */
 	public function getAppValue($key) {
 		$defaultValue = null;
-
 		if (array_key_exists($key, $this->defaults)) {
 			$defaultValue = $this->defaults[$key];
 		}
@@ -86,7 +87,14 @@ class ConfigService {
 	 * @return string
 	 */
 	public function getUserValue($key) {
-		return $this->config->getUserValue($this->userId, Application::APP_NAME, $key);
+		$defaultValue = null;
+		if (array_key_exists($key, $this->defaults)) {
+			$defaultValue = $this->defaults[$key];
+		}
+
+		return $this->config->getUserValue(
+			$this->userId, Application::APP_NAME, $key, $defaultValue
+		);
 	}
 
 	/**

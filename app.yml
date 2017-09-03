@@ -2,11 +2,11 @@
 - hosts: localhost
   remote_user: root
   vars:
-    app_namespace: Circles_Upgrade_Fix
-    github: daita/circles_upgrade_fix
-    app_id: circles_upgrade_fix
-    app_name: Circles Upgrade Fix
-    dir: /home/maxence/test_app
+    app_namespace: My_New_App
+    github: daita/new_app
+    app_id: my_app
+    app_name: My Fresh New App
+    dir: /home/maxence/my_new_app
 
   tasks:
 
@@ -37,14 +37,21 @@
         - { name: '/appinfo/info.xml' }
         - { name: '/appinfo/routes.php' }
         - { name: '/css/navigate.css' }
-        - { name: '/img/app.svg' }
+        - { name: '/img/ruler.svg' }
         - { name: '/js/app.js' }
+        - { name: '/js/admin.js' }
+        - { name: '/js/personal.js' }
+        - { name: '/lib/admin.php' }
+        - { name: '/lib/personal.php' }
         - { name: '/lib/AppInfo/Application.php' }
         - { name: '/lib/Controller/NavigationController.php' }
+        - { name: '/lib/Controller/SettingsController.php' }
         - { name: '/lib/Controller/SimpleController.php' }
         - { name: '/lib/Exceptions/SimpleException.php' }
         - { name: '/lib/Service/ConfigService.php' }
         - { name: '/lib/Service/MiscService.php' }
         - { name: '/lib/Service/SimpleService.php' }
         - { name: '/templates/navigate.php' }
+        - { name: '/templates/settings.admin.php' }
+        - { name: '/templates/settings.personal.php' }
 

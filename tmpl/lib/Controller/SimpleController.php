@@ -3,13 +3,14 @@
 namespace OCA\{{app_namespace}}\Controller;
 
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
 
 class SimpleController extends Controller {
 
-	public function __construct($appName, IRequest $request) {
-		parent::__construct($appName, $request);
+	public function __construct(IRequest $request) {
+		parent::__construct(Application::APP_NAME, $request);
 	}
 
 

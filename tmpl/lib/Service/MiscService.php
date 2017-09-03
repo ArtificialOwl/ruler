@@ -3,6 +3,7 @@
 namespace OCA\{{app_namespace}}\Service;
 
 use OCA\{{app_namespace}}\AppInfo\Application;
+use OCP\ILogger;
 
 class MiscService {
 
