@@ -37,6 +37,8 @@
         - { name: '/appinfo/info.xml' }
         - { name: '/appinfo/routes.php' }
         - { name: '/css/navigate.css' }
+        - { name: '/css/admin.css' }
+        - { name: '/css/personal.css' }
         - { name: '/img/ruler.svg' }
         - { name: '/js/app.js' }
         - { name: '/js/admin.js' }

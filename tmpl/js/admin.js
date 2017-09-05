@@ -1,39 +1,45 @@
 
+
+/** global: OC */
+
+var elements = {
+	test_{{app_id}}: null
+};
+
 $(document).ready(function () {
 
-	elements.allow_linked_groups = $('#allow_linked_groups');
-	elements.allow_federated_circles = $('#allow_federated_circles');
+	elements.test_{{app_id}} = $('#test_{{app_id}}');
+	elements.test_{{app_id}}.on('change', function () {
+		saveChange();
+	});
 
-	elements.allow_linked_groups.on('change', function () {
-		saveChange();
-	});
-	elements.allow_federated_circles.on('change', function () {
-		saveChange();
-	});
 
 	saveChange = function () {
 		$.ajax({
 			method: 'POST',
-			url: OC.generateUrl('/apps/circles/admin/settings'),
+			url: OC.generateUrl('/apps/{{app_id}}/settings/admin'),
 			data: {
-				allow_linked_groups: (elements.allow_linked_groups.is(
-					':checked')) ? '1' : '0',
-				allow_federated_circles: (elements.allow_federated_circles.is(
-					':checked')) ? '1' : '0'
+				data: {
+					test_{{app_id}}: (elements.test_{{app_id}}.is(':checked')) ? '1' : '0'
+				}
 			}
+
 		}).done(function (res) {
-			elements.allow_linked_groups.prop('checked', (res.allowLinkedGroups === '1'));
-			elements.allow_federated_circles.prop('checked', (res.allowFederatedCircles === '1'));
+			self.refreshSettings(res);
 		});
+	};
+
+	refreshSettings = function (result) {
+		elements.test_{{app_id}}.prop('checked', (result.test_{{app_id}} === '1'));
 	};
 
 	$.ajax({
 		method: 'GET',
-		url: OC.generateUrl('/apps/circles/admin/settings'),
+		url: OC.generateUrl('/apps/{{app_id}}/settings/admin'),
 		data: {}
 	}).done(function (res) {
-		elements.allow_linked_groups.prop('checked', (res.allowLinkedGroups === '1'));
-		elements.allow_federated_circles.prop('checked', (res.allowFederatedCircles === '1'));
+		self.refreshSettings(res);
 	});
+
 
 });

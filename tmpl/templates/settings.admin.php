@@ -15,7 +15,7 @@ style(Application::APP_NAME, 'admin');
 			<td colspan="2" class="left">Allow something:<br/>
 				<em>This is an example of a checkbox.</em></td>
 			<td class="right">
-				<input type="checkbox" value="1" id="allow_linked_groups"/>
+				<input type="checkbox" value="1" id="test_{{app_id}}"/>
 			</td>
 		</tr>
 	</table>
