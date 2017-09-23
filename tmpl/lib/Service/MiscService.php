@@ -23,5 +23,21 @@ class MiscService {
 		$this->logger->log($level, $message, $data);
 	}
 
+	/**
+	 * @param $arr
+	 * @param $k
+	 *
+	 * @param string $default
+	 *
+	 * @return array|string|integer
+	 */
+	public static function get($arr, $k, $default = '') {
+		if (!key_exists($k, $arr)) {
+			return $default;
+		}
+
+		return $arr[$k];
+	}
+	
 }
 
