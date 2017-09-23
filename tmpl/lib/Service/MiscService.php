@@ -38,6 +38,6 @@ class MiscService {
 
 		return $arr[$k];
 	}
-	
+
 }
 

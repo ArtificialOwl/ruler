@@ -56,9 +56,6 @@ class NavigationController extends Controller {
 	/**
 	 * compat NC 12 and lower
 	 *
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 *
 	 * @return TemplateResponse
 	 */
 	public function nc12personal() {
