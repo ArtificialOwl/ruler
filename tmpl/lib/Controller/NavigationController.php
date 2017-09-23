@@ -54,24 +54,15 @@ class NavigationController extends Controller {
 
 
 	/**
-	 * @NoCSRFRequired
+	 * compat NC 12 and lower
 	 *
-	 * @return TemplateResponse
-	 */
-	public function admin() {
-		return new TemplateResponse(Application::APP_NAME, 'settings.admin', [], 'blank');
-	}
-
-
-	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 *
 	 * @return TemplateResponse
 	 */
-	public function personal() {
-		return new TemplateResponse(Application::APP_NAME, 'settings.personal', [], 'blank');
+	public function nc12personal() {
+		return new TemplateResponse(Application::APP_NAME, 'settings.personal', [], '');
 	}
-
 
 }

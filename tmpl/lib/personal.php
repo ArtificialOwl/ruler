@@ -10,7 +10,7 @@ $app = new AppInfo\Application();
 /** @var TemplateResponse $response */
 $response = $app->getContainer()
 				->query(NavigationController::class)
-				->personal();
+				->nc12personal();
 
 return $response->render();
 

@@ -43,7 +43,6 @@
         - { name: '/js/app.js' }
         - { name: '/js/admin.js' }
         - { name: '/js/personal.js' }
-        - { name: '/lib/admin.php' }
         - { name: '/lib/personal.php' }
         - { name: '/lib/AppInfo/Application.php' }
         - { name: '/lib/Controller/NavigationController.php' }
